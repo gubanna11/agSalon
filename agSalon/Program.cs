@@ -1,7 +1,18 @@
+using agSalon.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddEntityFrameworkMySql().AddDbContext<AppDbContext>(options => {
+	options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnectionString"),
+		new MySqlServerVersion(new Version(8, 0, 11)));
+});
+
+
 
 var app = builder.Build();
 
