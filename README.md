@@ -1,3 +1,5 @@
+agSalon - beauty salon web app for making appointments and tracking attendances.
+
 Features:
 1) Models & AppDbContext 
 2) AppDbInitializer
