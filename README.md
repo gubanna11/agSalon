@@ -1,6 +1,6 @@
 Features:
-1) Models
-2) AppDbContext & AppDbInitializer
+1) Models & AppDbContext 
+2) AppDbInitializer
 3) crud groups of services
 4) groups views 
 5) crud services
