@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace agSalon.Data.Enums
+namespace agSalon.Domain.Concrete
 {
-    public enum Gender
-    {
-        Female = 1, Male
-    }
+	public class AppDbInitializer
+	{
+	}
 }

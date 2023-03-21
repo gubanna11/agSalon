@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace agSalon.Migrations
+namespace agSalon.Domain.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration

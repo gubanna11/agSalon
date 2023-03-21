@@ -1,9 +1,9 @@
-﻿using agSalon.Data.Base;
+﻿using agSalon.Domain.Base;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace agSalon.Models
+namespace agSalon.Domain.Entities
 {
     [Index(propertyNames: nameof(Name), IsUnique = true)]
     public class Service:IEntityBase

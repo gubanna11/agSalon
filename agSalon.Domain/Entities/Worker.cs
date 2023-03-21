@@ -1,8 +1,8 @@
-﻿using agSalon.Data.Enums;
+﻿using agSalon.Domain.Entities.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace agSalon.Models
+namespace agSalon.Domain.Entities
 {
     public class Worker
     {

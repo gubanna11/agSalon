@@ -1,8 +1,9 @@
-﻿using agSalon.Data.Base;
+﻿using agSalon.Domain.Base;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace agSalon.Models
+namespace agSalon.Domain.Entities
 {
     [Table("groups_of_services")]
 	public class GroupOfServices:IEntityBase

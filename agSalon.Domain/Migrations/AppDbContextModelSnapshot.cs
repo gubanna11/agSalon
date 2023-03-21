@@ -3,11 +3,11 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using agSalon.Data;
+using agSalon.Domain.Concrete;
 
 #nullable disable
 
-namespace agSalon.Migrations
+namespace agSalon.Domain.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace agSalon.Migrations
                 .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("agSalon.Models.Attendance", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.Attendance", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -79,7 +79,7 @@ namespace agSalon.Migrations
                     b.ToTable("Attendances");
                 });
 
-            modelBuilder.Entity("agSalon.Models.Client", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.Client", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)")
@@ -112,7 +112,7 @@ namespace agSalon.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("agSalon.Models.GroupOfServices", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.GroupOfServices", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -139,7 +139,7 @@ namespace agSalon.Migrations
                     b.ToTable("groups_of_services");
                 });
 
-            modelBuilder.Entity("agSalon.Models.Service", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.Service", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,7 +164,7 @@ namespace agSalon.Migrations
                     b.ToTable("Services");
                 });
 
-            modelBuilder.Entity("agSalon.Models.Service_Group", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.Service_Group", b =>
                 {
                     b.Property<int>("ServiceId")
                         .HasColumnType("int")
@@ -184,7 +184,7 @@ namespace agSalon.Migrations
                     b.ToTable("Services_Groups");
                 });
 
-            modelBuilder.Entity("agSalon.Models.Worker", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.Worker", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(255)")
@@ -205,7 +205,7 @@ namespace agSalon.Migrations
                     b.ToTable("Workers");
                 });
 
-            modelBuilder.Entity("agSalon.Models.Worker_Group", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.Worker_Group", b =>
                 {
                     b.Property<string>("WorkerId")
                         .HasColumnType("varchar(255)")
@@ -222,23 +222,23 @@ namespace agSalon.Migrations
                     b.ToTable("Workers_Groups");
                 });
 
-            modelBuilder.Entity("agSalon.Models.Attendance", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.Attendance", b =>
                 {
-                    b.HasOne("agSalon.Models.Client", "Client")
+                    b.HasOne("agSalon.Domain.Entities.Client", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("agSalon.Models.GroupOfServices", "Group")
+                    b.HasOne("agSalon.Domain.Entities.GroupOfServices", "Group")
                         .WithMany()
                         .HasForeignKey("GroupId");
 
-                    b.HasOne("agSalon.Models.Service", "Service")
+                    b.HasOne("agSalon.Domain.Entities.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId");
 
-                    b.HasOne("agSalon.Models.Worker", "Worker")
+                    b.HasOne("agSalon.Domain.Entities.Worker", "Worker")
                         .WithMany()
                         .HasForeignKey("WorkerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -253,17 +253,17 @@ namespace agSalon.Migrations
                     b.Navigation("Worker");
                 });
 
-            modelBuilder.Entity("agSalon.Models.Service_Group", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.Service_Group", b =>
                 {
-                    b.HasOne("agSalon.Models.GroupOfServices", "Group")
+                    b.HasOne("agSalon.Domain.Entities.GroupOfServices", "Group")
                         .WithMany("Services_Groups")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("agSalon.Models.Service", "Service")
+                    b.HasOne("agSalon.Domain.Entities.Service", "Service")
                         .WithOne("Service_Group")
-                        .HasForeignKey("agSalon.Models.Service_Group", "ServiceId")
+                        .HasForeignKey("agSalon.Domain.Entities.Service_Group", "ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -272,9 +272,9 @@ namespace agSalon.Migrations
                     b.Navigation("Service");
                 });
 
-            modelBuilder.Entity("agSalon.Models.Worker", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.Worker", b =>
                 {
-                    b.HasOne("agSalon.Models.Client", "Client")
+                    b.HasOne("agSalon.Domain.Entities.Client", "Client")
                         .WithMany()
                         .HasForeignKey("Id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -283,15 +283,15 @@ namespace agSalon.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("agSalon.Models.Worker_Group", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.Worker_Group", b =>
                 {
-                    b.HasOne("agSalon.Models.GroupOfServices", "Group")
+                    b.HasOne("agSalon.Domain.Entities.GroupOfServices", "Group")
                         .WithMany("Workers_Groups")
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("agSalon.Models.Worker", "Worker")
+                    b.HasOne("agSalon.Domain.Entities.Worker", "Worker")
                         .WithMany("Workers_Groups")
                         .HasForeignKey("WorkerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -302,20 +302,20 @@ namespace agSalon.Migrations
                     b.Navigation("Worker");
                 });
 
-            modelBuilder.Entity("agSalon.Models.GroupOfServices", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.GroupOfServices", b =>
                 {
                     b.Navigation("Services_Groups");
 
                     b.Navigation("Workers_Groups");
                 });
 
-            modelBuilder.Entity("agSalon.Models.Service", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.Service", b =>
                 {
                     b.Navigation("Service_Group")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("agSalon.Models.Worker", b =>
+            modelBuilder.Entity("agSalon.Domain.Entities.Worker", b =>
                 {
                     b.Navigation("Workers_Groups");
                 });

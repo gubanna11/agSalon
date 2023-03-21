@@ -1,7 +1,8 @@
-﻿using agSalon.Models;
+﻿using agSalon.Domain.Concrete.EntityConfiguration;
+using agSalon.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace agSalon.Data
+namespace agSalon.Domain.Concrete
 {
     public class AppDbContext: DbContext
     {
@@ -21,6 +22,10 @@ namespace agSalon.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new AttendanceConfiguration());
+            modelBuilder.ApplyConfiguration(new GroupOfServicesConfiguration());
+
+
             /**/
             modelBuilder.Entity<Service_Group>().HasKey(sg => new { sg.ServiceId, sg.GroupId });
 
@@ -34,11 +39,6 @@ namespace agSalon.Data
             modelBuilder.Entity<Worker_Group>().HasOne(w => w.Group).WithMany(wg => wg.Workers_Groups);
 
 
-            modelBuilder.Entity<Attendance>().HasIndex(att => new { att.ClientId, att.Date, att.ServiceId }).IsUnique();
-            modelBuilder.Entity<Attendance>().HasIndex(att => new { att.WorkerId, att.Date, att.ServiceId }).IsUnique();
-            modelBuilder.Entity<Attendance>().Property(a => a.Time).HasColumnType("time");
-
-            modelBuilder.Entity<GroupOfServices>().HasIndex(g => g.Name).IsUnique();
 
             base.OnModelCreating(modelBuilder);
         }

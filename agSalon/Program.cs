@@ -1,4 +1,4 @@
-using agSalon.Data;
+using agSalon.Domain.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

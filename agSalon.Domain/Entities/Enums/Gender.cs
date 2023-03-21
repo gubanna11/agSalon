@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace agSalon.Data.Base
+namespace agSalon.Domain.Entities.Enums
 {
-    public interface IEntityBase
+    public enum Gender
     {
-        public int Id { get; set; }
+        Male = 1, Female
     }
 }

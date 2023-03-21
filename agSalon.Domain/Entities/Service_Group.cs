@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace agSalon.Models
+namespace agSalon.Domain.Entities
 {
     public class Service_Group
     {
