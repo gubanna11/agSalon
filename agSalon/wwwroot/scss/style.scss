@@ -1,0 +1,37 @@
+﻿//@import ""
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+
+.delete > form {
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+.delete > form > input {
+}
+
+.delete.active > form {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all;
+}

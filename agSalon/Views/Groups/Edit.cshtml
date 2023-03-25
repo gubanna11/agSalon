@@ -1,0 +1,40 @@
+﻿@model GroupOfServices
+
+<form asp-action="Edit" enctype="multipart/form-data" asp-controller="Groups" asp-route-id="@Model.Id" asp-route-ImgUrl="@Model.ImgUrl">
+	@*	<div>
+	<input asp-for="@Model.Id" type="hidden">
+	</div>*@
+	<div>
+		<label asp-for="@Model.Name"></label>
+		<input asp-for="@Model.Name" value="@Model.Name">
+	</div>
+
+
+	<div>
+		<label asp-for="Img"></label>
+		<input type="file" asp-for="Img" id="img" class="input-file" />
+	</div>
+
+	<div>
+		@*<input asp-for="@Model.ImgUrl" hidden/>*@
+		<img src="/img/groups/@Model.ImgUrl" id="ImgPrev" height="150" alt="" />
+	</div>
+
+	<div>
+		<input type="submit" value="UPDATE">
+	</div>
+</form>
+
+
+@section Scripts{
+	<script>
+		const img = document.getElementById('img');
+		img.addEventListener('change', function () {
+			const imgPrev = document.getElementById('ImgPrev');
+			if (img.files[0] == null)
+				imgPrev.src = '';
+			else
+				imgPrev.src = window.URL.createObjectURL(this.files[0])
+		})
+	</script>
+}

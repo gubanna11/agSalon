@@ -1,0 +1,33 @@
+﻿@model IEnumerable<GroupOfServices>
+
+@{
+	ViewData["Title"] = "Groups of services";
+}
+
+<div class="groups__section">
+
+	@foreach (var item in Model)
+	{
+		<a asp-controller="Services" asp-action="Index" asp-route-groupId="@item.Id">@item.Name</a>
+
+		@if (item.ImgUrl != "")
+		{
+			<div>
+				<img src="/img/groups/@item.ImgUrl" height="150" />
+			</div>
+		}
+
+		<a asp-action="Edit" asp-route-groupId="@item.Id">Update</a>
+
+
+		@await Component.InvokeAsync("Delete", item.Id)
+
+		@*<div class="delete">
+	<a class="delete-confirm">Delete</a>
+
+	<form asp-action="Delete" asp-route-id="@item.Id">
+	<input type="submit" style="color:red" value="Delete" />
+	</form>
+	</div>*@
+	}
+</div>

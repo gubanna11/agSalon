@@ -1,4 +1,4 @@
-﻿using agSalon.Domain.Base;
+﻿using agSalon.Domain.Abstract.Repositories;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,11 +19,10 @@ namespace agSalon.Domain.Entities
 		public string Name { get; set; }
 
 
-		[Required]
-		[StringLength(50)]
+		[StringLength(100)]
 		[Column("img_url")]
 
-		public string ImgUrl { get; set; }
+		public string? ImgUrl { get; set; }
 
 		[Required(ErrorMessage = "Please choose image")]
         [NotMapped]

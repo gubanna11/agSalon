@@ -1,0 +1,10 @@
+﻿@model int 
+
+<div class="delete">
+	<a class="delete-confirm">Delete</a>
+	<form asp-action="Delete" asp-route-id="@Model">
+		<input type="submit" style="color:red" value="Delete">
+	</form>
+</div>
+
+

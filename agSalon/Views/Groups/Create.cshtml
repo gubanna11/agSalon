@@ -1,0 +1,42 @@
+﻿@model GroupOfServices
+
+@{
+    ViewData["Title"] = "Create a Group";
+}
+
+<form asp-action="Create" enctype="multipart/form-data">
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </div>
+
+    <div>
+        <label asp-for="Img"></label>
+        <input type="file" asp-for="Img" id="img" />
+    </div>
+
+    <div>
+        <img id="ImgPrev" height="150" />
+    </div>
+
+    <div>
+        <input type="submit" value="Create" />
+        <a asp-action="Index"> Show all </a>
+    </div>
+
+</form>
+
+
+@section Scripts{
+    <script>
+        const img = document.getElementById('img');
+        img.addEventListener('change', function(){
+            const imgPrev =  document.getElementById('ImgPrev');
+            if(img.files[0] == null)
+                imgPrev.src = '';
+            else
+               imgPrev.src = window.URL.createObjectURL(this.files[0])
+        })
+    </script>
+}

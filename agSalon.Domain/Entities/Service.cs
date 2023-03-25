@@ -1,4 +1,4 @@
-﻿using agSalon.Domain.Base;
+﻿using agSalon.Domain.Abstract.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

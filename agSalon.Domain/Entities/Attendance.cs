@@ -1,4 +1,4 @@
-﻿using agSalon.Domain.Base;
+﻿using agSalon.Domain.Abstract.Repositories;
 using agSalon.Domain.Entities.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
