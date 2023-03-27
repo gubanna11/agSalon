@@ -9,13 +9,13 @@ namespace agSalon.Controllers
 {
 	public class GroupsController : Controller
 	{
-		private readonly IUnitOfWork _unit;
+		private readonly IUnitOfWork _unitOfWork;
 		private readonly IGroupsService _groupsService;
 
 
-		public GroupsController(IUnitOfWork unit, IGroupsService groupsService)
+		public GroupsController(IUnitOfWork unitOfWork, IGroupsService groupsService)
 		{
-			_unit = unit;
+			_unitOfWork = unitOfWork;
 			_groupsService = groupsService;
 		}
 
@@ -23,7 +23,7 @@ namespace agSalon.Controllers
 		{
 			//var allGroups = await _unit.Repository<GroupOfServices>().GetAllAsync();
 			var allGroups = await _groupsService.GetAllAsync();
-
+			
 			return View(allGroups);
 		}
 
@@ -41,11 +41,10 @@ namespace agSalon.Controllers
 
 			await _groupsService.AddNewGroupAsync(newGroup);
 
-			await _unit.SaveChangesAsync();
+			await _unitOfWork.SaveChangesAsync();
 
-			return RedirectToAction("Index");
+			return RedirectToAction(nameof(Index));
 		}
-
 
 		public async Task<IActionResult> Edit(int groupId)
 		{
@@ -58,9 +57,9 @@ namespace agSalon.Controllers
 		public async Task<IActionResult> Edit(GroupOfServices group)
 		{
 			await _groupsService.UpdateGroupAsync(group);
-			await _unit.SaveChangesAsync();
+			await _unitOfWork.SaveChangesAsync();
 
-			return RedirectToAction("Index");
+			return RedirectToAction(nameof(Index));
 		}
 
 
@@ -68,9 +67,9 @@ namespace agSalon.Controllers
 		public async Task<IActionResult> Delete(int id)
 		{
 			await _groupsService.DeleteGroupAsync(id);
-			await _unit.SaveChangesAsync();
+			await _unitOfWork.SaveChangesAsync();
 
-			return RedirectToAction("Index");
+			return RedirectToAction(nameof(Index));
 		}
 	}
 }

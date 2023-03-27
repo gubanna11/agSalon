@@ -1,0 +1,30 @@
+﻿
+@model ServiceVM
+
+@{
+    ViewData["Title"] = "New Service";
+}
+
+<p>@ViewBag.Duplicate</p>
+
+<form asp-action="Create">
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+    </div>
+
+    <div>
+        <label asp-for="Price"></label>
+        <input  asp-for="Price" />
+    </div>
+
+    <div>
+        <label asp-for="GroupId"></label>
+        <select asp-for="GroupId" asp-items="ViewBag.Groups"></select>
+    </div>
+
+    <div>
+        @*<a asp-action="Index"  asp-route-id="@Model.GroupId"> Show all </a>*@
+        <input type="submit" value="Create"/>
+    </div>
+</form>

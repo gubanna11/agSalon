@@ -33,10 +33,20 @@ namespace agSalon.Domain.Abstract.Repositories
             //await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
-            => await _context.Set<T>().ToListAsync();
+		//public async Task<IEnumerable<T>> GetAllAsync()
+		//    => await _context.Set<T>().ToListAsync();
 
-        public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includeProperties)
+		public IEnumerable<T> GetAll()
+		{
+			return _context.Set<T>();
+		}
+
+		public async Task<IReadOnlyList<T>> GetAllAsync()
+		{
+			return await _context.Set<T>().ToListAsync();
+		}
+
+		public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> query = _context.Set<T>();
 

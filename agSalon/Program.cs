@@ -24,6 +24,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 //builder.Services.AddScoped<EntityBaseRepository<GroupOfServices>, GroupsService>();
 
 builder.Services.AddScoped<IGroupsService, GroupsService>();
+builder.Services.AddScoped<IServicesService, ServicesService>();
 
 
 

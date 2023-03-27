@@ -1,0 +1,36 @@
+﻿@model ServiceVM
+
+@*TITLE - NAME OF THE GROUP JS*@
+
+<p id="groupName">@ViewBag.GroupName</p>
+
+<form asp-action="Edit" asp-controller="Services" asp-route-id="@Model.Id">
+	<div>
+		<label asp-for="@Model.Name"></label>
+		<input asp-for="@Model.Name" value="@Model.Name">
+	</div>
+
+	<div>
+		<label asp-for="@Model.Price"></label>
+		<input asp-for="@Model.Price" value="@Model.Price">
+	</div>
+	
+	<div>
+		<label asp-for="@Model.GroupId"></label>
+		<select asp-for="GroupId" id="selectGroup" asp-items="@ViewBag.Groups"></select>
+	</div>
+
+	<div>
+		<input type="submit" value="UPDATE">
+	</div>
+</form>
+
+@section Scripts{
+	<script>
+		const groupName = document.getElementById('groupName');
+		const selectGroup = document.getElementById('selectGroup');
+		selectGroup.addEventListener('change', function(){
+			groupName.textContent = selectGroup.textContent[option];
+		})
+	</script>
+}
