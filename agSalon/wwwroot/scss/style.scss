@@ -1,4 +1,4 @@
-﻿//@import ""
+﻿@import "reset.scss";
 
 html {
     font-size: 14px;
@@ -34,4 +34,56 @@ body {
     visibility: visible;
     opacity: 1;
     pointer-events: all;
+}
+
+
+
+.identity {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 220px;
+}
+
+
+
+.identity-sign-in {
+    position: relative;
+}
+
+.identity-sign-in__info {
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    background: grey;
+    transition: all 0.6s ease;
+    position: absolute;
+    top: 100%;
+    left: -36px;
+    min-width: 220px;
+    padding: 20px 25px;
+    border: 1px solid #d8dede;
+    border-radius: 7px;
+    background-color: #fff;
+}
+
+.identity-sign-in:hover .identity-sign-in__info {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+.identity-sign-out {
+}
+
+.nav-item a{
+    font-size: 20px;
+}
+
+.navbar{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }

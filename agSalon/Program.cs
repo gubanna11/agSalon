@@ -4,6 +4,8 @@ using agSalon.Domain.Concrete;
 using agSalon.Domain.Entities;
 using agSalon.Services.Services.Implementations;
 using agSalon.Services.Services.Interfaces;
+using agSalon.Services.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +28,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IGroupsService, GroupsService>();
 builder.Services.AddScoped<IServicesService, ServicesService>();
 
+builder.Services.AddIdentity<Client, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
 
 var app = builder.Build();
@@ -43,6 +46,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -50,5 +54,6 @@ app.MapControllerRoute(
 	pattern: "{controller=Home}/{action=Index}/{id?}");
 
 AppDbInitializer.Seed(app);
+AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
 
 app.Run();

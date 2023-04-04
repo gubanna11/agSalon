@@ -1,5 +1,8 @@
 ﻿using agSalon.Domain.Entities;
+using agSalon.Domain.Entities.Enums;
+using agSalon.Domain.Entities.Static;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -186,129 +189,129 @@ namespace agSalon.Domain.Concrete
 
 				if (!context.Services_Groups.Any())
 				{
-					context.Services_Groups.AddRange(new List<Service_Group>()
+					context.Services_Groups.AddRange(new List<ServiceGroup>()
 					{
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 1,
 							GroupId = 1
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 2,
 							GroupId = 1
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 3,
 							GroupId = 1
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 4,
 							GroupId = 1
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 5,
 							GroupId = 1
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 6,
 							GroupId = 1
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 7,
 							GroupId = 1
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 8,
 							GroupId = 2
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 9,
 							GroupId = 2
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 10,
 							GroupId = 2
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 11,
 							GroupId = 3
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 12,
 							GroupId = 3
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 13,
 							GroupId = 3
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 14,
 							GroupId = 3
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 15,
 							GroupId = 4
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 16,
 							GroupId = 4
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 17,
 							GroupId = 4
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 18,
 							GroupId = 4
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 19,
 							GroupId = 4
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 20,
 							GroupId = 5
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 21,
 							GroupId = 5
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 22,
 							GroupId = 5
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 23,
 							GroupId = 6
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 24,
 							GroupId = 6
 						},
-						new Service_Group()
+						new ServiceGroup()
 						{
 							ServiceId = 25,
 							GroupId = 6
@@ -317,6 +320,163 @@ namespace agSalon.Domain.Concrete
 
 					context.SaveChanges();
 				}
+			}
+		}
+
+		public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+		{
+			using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+			{
+				var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+				if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+					await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+
+				if (!await roleManager.RoleExistsAsync(UserRoles.Worker))
+					await roleManager.CreateAsync(new IdentityRole(UserRoles.Worker));
+
+				if (!await roleManager.RoleExistsAsync(UserRoles.Client))
+					await roleManager.CreateAsync(new IdentityRole(UserRoles.Client));
+
+
+				var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<Client>>();
+
+				string adminEmail = "admin@gmail.com";
+				var adminUser = await userManager.FindByEmailAsync(adminEmail);
+
+				if (adminUser == null)
+				{
+					var newAdminUser = new Client()
+					{
+						Name = "Admin",
+						Surname = "Admin",
+						PhoneNumber = "+380662738199",
+						DateBirth = new DateTime(1990, 2, 3),
+						Email = adminEmail,
+						EmailConfirmed = true,
+						UserName = adminEmail
+					};
+					await userManager.CreateAsync(newAdminUser, "Coding@1234?");
+					await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+				}
+
+
+				string userEmail = "client@gmail.com";
+				var clientUser = await userManager.FindByEmailAsync(userEmail);
+
+				if (clientUser == null)
+				{
+					var newClientUser = new Client()
+					{
+						Name = "Client",
+						Surname = "Client",
+						PhoneNumber = "+380993212483",
+						DateBirth = new DateTime(1980, 3, 20),
+						Email = userEmail,
+						EmailConfirmed = true,
+						UserName = userEmail
+					};
+					await userManager.CreateAsync(newClientUser, "Coding@1234?");
+					await userManager.AddToRoleAsync(newClientUser, UserRoles.Client);
+				}
+
+
+
+				var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+
+				if (!context.Workers.Any())
+				{
+					string workerEmail = "worker@gmail.com";
+					var workerUser = await userManager.FindByEmailAsync(workerEmail);
+
+					if (workerUser == null)
+					{
+						var newWorkerUser = new Client()
+						{
+							Name = "Worker",
+							Surname = "Worker",
+							PhoneNumber = "+380989441213",
+							DateBirth = new DateTime(1980, 3, 20),
+							Email = workerEmail,
+							EmailConfirmed = true,
+							UserName = workerEmail
+						};
+						await userManager.CreateAsync(newWorkerUser, "Coding@1234?");
+						await userManager.AddToRoleAsync(newWorkerUser, UserRoles.Worker);
+
+
+						var newWorker = new Worker()
+						{
+							Id = newWorkerUser.Id,
+							Address = "Workers's Address",
+							Gender = Gender.Female
+						};
+
+						context.Workers.Add(newWorker);
+
+						context.Workers_Groups.AddRange(
+							new Worker_Group()
+							{
+								WorkerId = newWorker.Id,
+								GroupId = 1
+							},
+							new Worker_Group()
+							{
+								WorkerId = newWorker.Id,
+								GroupId = 6
+							}
+						);
+
+						context.SaveChanges();
+					}
+
+
+					string worker2Email = "worker2@gmail.com";
+					var worker2User = await userManager.FindByEmailAsync(worker2Email);
+
+					if (worker2User == null)
+					{
+						var newWorkerUser = new Client()
+						{
+							Name = "Worker2",
+							Surname = "Worker",
+							PhoneNumber = "+380989441213",
+							DateBirth = new DateTime(1980, 3, 20),
+							Email = worker2Email,
+							EmailConfirmed = true,
+							UserName = worker2Email
+						};
+						await userManager.CreateAsync(newWorkerUser, "Coding@1234?");
+						await userManager.AddToRoleAsync(newWorkerUser, UserRoles.Worker);
+
+
+						var newWorker = new Worker()
+						{
+							Id = newWorkerUser.Id,
+							Address = "Workers's 2 Address",
+							Gender = Gender.Female
+						};
+
+						context.Workers.Add(newWorker);
+
+						context.Workers_Groups.AddRange(
+							new Worker_Group()
+							{
+								WorkerId = newWorker.Id,
+								GroupId = 2
+							},
+							new Worker_Group()
+							{
+								WorkerId = newWorker.Id,
+								GroupId = 6
+							}
+						);
+
+						context.SaveChanges();
+
+					}
+				}
+
 			}
 		}
 

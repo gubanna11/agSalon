@@ -8,18 +8,20 @@
 	<p>Group: @ViewBag.GroupName</p>
 
 	@*<form>
-		<input type="submit" asp-action="Update" asp-controller="" asp-route-groups="@Model.ToList()" value="SAVE">
+	<input type="submit" asp-action="Update" asp-controller="" asp-route-groups="@Model.ToList()" value="SAVE">
 	</form>*@
 
 	@foreach (var item in Model)
-	{	
+	{
 		<div class="container" style="display:flex; justify-content:space-between">
 			<p>@item.Name</p>
 
 			<p>@item.Price</p>
-
-			<a asp-action="Edit" asp-route-id="@item.Id">Update</a>
-			@await Component.InvokeAsync("Delete", item.Id)
+			@if (User.Identity.IsAuthenticated && User.IsInRole(UserRoles.Admin))
+			{
+				<a asp-action="Edit" asp-route-id="@item.Id">Update</a>
+				@await Component.InvokeAsync("Delete", item.Id)
+			}
 		</div>
 	}
 </div>

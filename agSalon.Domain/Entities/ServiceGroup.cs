@@ -2,7 +2,7 @@
 
 namespace agSalon.Domain.Entities
 {
-    public class Service_Group
+    public class ServiceGroup
     {
         [Column("service_id")]
         public int ServiceId { get; set; }

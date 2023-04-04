@@ -35,7 +35,7 @@ namespace agSalon.Services.Services.Implementations
 			await _context.Services.AddAsync(service);
 			await _context.SaveChangesAsync();
 
-			Service_Group serviceGroup = new Service_Group
+			ServiceGroup serviceGroup = new ServiceGroup
 			{
 				ServiceId = service.Id,
 				GroupId = newService.GroupId
@@ -58,7 +58,7 @@ namespace agSalon.Services.Services.Implementations
 			var service_group = _context.Services_Groups.Where(sg => sg.ServiceId == service.Id).FirstOrDefault();
 			_context.Services_Groups.Remove(service_group);
 
-			Service_Group newService_Group = new Service_Group()
+			ServiceGroup newService_Group = new ServiceGroup()
 			{
 				ServiceId = service.Id,
 				GroupId = serviceVM.GroupId

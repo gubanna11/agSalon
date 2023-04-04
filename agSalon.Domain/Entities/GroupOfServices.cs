@@ -30,7 +30,7 @@ namespace agSalon.Domain.Entities
 
 
         
-        public List<Service_Group> Services_Groups { get; set; }
+        public List<ServiceGroup> Services_Groups { get; set; }
         public List<Worker_Group> Workers_Groups { get; set; }
     }
 }

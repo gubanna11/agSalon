@@ -13,7 +13,9 @@ namespace agSalon.Domain.Entities
 
         [Column("client_id"), Required]
         public string ClientId { get; set; }
+   
         public Client Client { get; set; }
+
 
         [Column("group_id"), ]
 

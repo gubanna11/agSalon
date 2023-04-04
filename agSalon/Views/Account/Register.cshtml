@@ -1,0 +1,60 @@
+﻿@model RegisterVM
+
+@if (TempData["Error"] != null)
+{
+	<div>
+		<p class="text-danger">Sorry! - @TempData["Error"]</p>
+	</div>
+}
+
+<form asp-action="Register">
+	<div>
+		<label asp-for="Name"></label>
+		<input asp-for="Name" />
+		<span asp-validation-for="Name"></span>
+	</div>
+	<div>
+		<label asp-for="Surname"></label>
+		<input asp-for="Surname" />
+		<span asp-validation-for="Surname"></span>
+	</div>
+	<div>
+		<label asp-for="DateBirth"></label>
+		<input id="date" asp-for="DateBirth" type="date" value="@Model.DateBirth.ToString("yyyy-MM-dd")" />
+		<span asp-validation-for="DateBirth"></span>
+	</div>
+	<div>
+		<label asp-for="Phone"></label>
+		<input type="tel" asp-for="Phone" />
+		<span asp-validation-for="Phone"></span>
+	</div>
+	<div>
+		<label asp-for="EmailAddress"></label>
+		<input type="email" asp-for="EmailAddress" />
+		<span asp-validation-for="EmailAddress"></span>
+	</div>
+	<div>
+		<label asp-for="Password"></label>
+		<input asp-for="Password" />
+		@if (ViewBag.Errors != null)
+		{
+			foreach (var item in ViewBag.Errors)
+			{
+				<p style="color:red" asp-validation-for="Password">@item.Description</p>
+			}
+		}
+	</div>
+	<div>
+		<label asp-for="ConfirmPassword"></label>
+		<input asp-for="ConfirmPassword" />
+		<span asp-validation-for="ConfirmPassword"></span>
+	</div>
+	<div>
+		<input asp-action="Register" value="Register" type="submit" />
+	</div>
+</form>
+
+@section Scripts{
+	
+}
+

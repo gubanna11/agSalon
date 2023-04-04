@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Client>
+
+@foreach (var item in Model)
+{
+    <div>
+        <p><a>@item.Id</a> @item.Surname @item.Name @item.Email @item.UserName </p>
+    </div>
+}

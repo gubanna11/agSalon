@@ -1,16 +1,17 @@
 ﻿using agSalon.Domain.Concrete.EntityConfiguration;
 using agSalon.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace agSalon.Domain.Concrete
 {
-    public class AppDbContext: DbContext
-    {
+    public class AppDbContext: IdentityDbContext<Client>
+	{
         public DbSet<Service> Services { get; set; }
         public DbSet<GroupOfServices> Groups { get; set; }
-        public DbSet<Service_Group> Services_Groups { get; set; }
+        public DbSet<ServiceGroup> Services_Groups { get; set; }
 
-        public DbSet<Client> Clients { get; set; }
+        //public DbSet<Client> Clients { get; set; }
 
         public DbSet<Worker> Workers { get; set; }
 
@@ -27,11 +28,11 @@ namespace agSalon.Domain.Concrete
 
 
             /**/
-            modelBuilder.Entity<Service_Group>().HasKey(sg => new { sg.ServiceId, sg.GroupId });
+            modelBuilder.Entity<ServiceGroup>().HasKey(sg => new { sg.ServiceId, sg.GroupId });
 
-            modelBuilder.Entity<Service_Group>().HasOne(g => g.Group).WithMany(sg => sg.Services_Groups);
+            modelBuilder.Entity<ServiceGroup>().HasOne(g => g.Group).WithMany(sg => sg.Services_Groups);
 
-            modelBuilder.Entity<Service_Group>().HasOne(s => s.Service).WithOne(sg => sg.Service_Group);
+            modelBuilder.Entity<ServiceGroup>().HasOne(s => s.Service).WithOne(sg => sg.Service_Group);
 
             /**/
             modelBuilder.Entity<Worker_Group>().HasKey(wg => new { wg.WorkerId, wg.GroupId });

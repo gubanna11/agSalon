@@ -1,0 +1,29 @@
+﻿
+@inject UserManager<Client> UserManager;
+
+@if (!User.Identity.IsAuthenticated)
+{
+	<div class="identity">
+		<a asp-controller="Account" asp-action="Login" class="sign-in">Sign In</a>
+		<a asp-controller="Account" asp-action="Register" class="sign-up">Sign Up</a>
+	</div>
+}
+else
+{
+	<div class="identity">
+		<div class="identity-sign-in">
+			@*<img class="header-identity__img" src="img/person.svg">*@
+			<i class="bi bi-person"></i>
+			<div class="identity-sign-in__info">
+				@UserManager.GetUserName(User)
+			</div>
+		</div>
+
+		<div class="identity-sign-out">
+			<form asp-controller="Account" asp-action="Logout">
+				<button type="submit"><i class="bi bi-box-arrow-right"></i></button>
+			</form>
+		</div>
+	</div>
+}
+

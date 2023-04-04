@@ -21,6 +21,6 @@ namespace agSalon.Domain.Entities
         [Column("price")]
         public double Price { get; set; }
 
-        public Service_Group Service_Group { get; set; }
+        public ServiceGroup Service_Group { get; set; }
     }
 }
