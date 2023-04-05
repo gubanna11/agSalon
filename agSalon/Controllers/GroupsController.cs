@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using agSalon.Services.Services;
 using agSalon.Services.Services.Implementations;
 using agSalon.Services.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using agSalon.Domain.Entities.Static;
 
 namespace agSalon.Controllers
 {
@@ -27,13 +29,14 @@ namespace agSalon.Controllers
 			return View(allGroups);
 		}
 
+		[Authorize(Roles = UserRoles.Admin)]
 		public IActionResult Create()
 		{
 			return View();
 		}
 
 
-
+		[Authorize(Roles = UserRoles.Admin)]
 		[HttpPost]
 		public async Task<IActionResult> Create(GroupOfServices newGroup)
 		{
@@ -46,6 +49,7 @@ namespace agSalon.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
+		//[Authorize(Roles = UserRoles.Admin)]
 		public async Task<IActionResult> Edit(int groupId)
 		{
 			var group = await _groupsService.GetByIdAsync(groupId);
@@ -53,6 +57,7 @@ namespace agSalon.Controllers
 			return View(group);
 		}
 
+		[Authorize(Roles = UserRoles.Admin)]
 		[HttpPost]
 		public async Task<IActionResult> Edit(GroupOfServices group)
 		{
@@ -62,7 +67,7 @@ namespace agSalon.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
-
+		[Authorize(Roles = UserRoles.Admin)]
 		[HttpPost]
 		public async Task<IActionResult> Delete(int id)
 		{

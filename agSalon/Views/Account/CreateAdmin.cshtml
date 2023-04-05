@@ -1,6 +1,6 @@
 ﻿@model RegisterVM
 
-<p class="display4">Create @TempData["Role"]</p>
+<p class="display4">Create Admin</p>
 
 @if (TempData["Error"] != null)
 {
@@ -52,11 +52,6 @@
 		<span asp-validation-for="ConfirmPassword"></span>
 	</div>
 	<div>
-		<input asp-action="Register" asp-route-role="@TempData["Role"]" value="Register" type="submit" />
+		<input asp-action="Register" asp-route-role="Admin" value="Register" type="submit" />
 	</div>
 </form>
-
-@section Scripts{
-	
-}
-

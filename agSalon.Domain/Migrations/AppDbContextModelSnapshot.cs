@@ -536,8 +536,7 @@ namespace agSalon.Domain.Migrations
 
             modelBuilder.Entity("agSalon.Domain.Entities.Service", b =>
                 {
-                    b.Navigation("Service_Group")
-                        .IsRequired();
+                    b.Navigation("Service_Group");
                 });
 
             modelBuilder.Entity("agSalon.Domain.Entities.Worker", b =>

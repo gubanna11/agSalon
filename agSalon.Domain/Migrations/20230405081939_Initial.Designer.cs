@@ -11,7 +11,7 @@ using agSalon.Domain.Concrete;
 namespace agSalon.Domain.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230402164443_Initial")]
+    [Migration("20230405081939_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -539,8 +539,7 @@ namespace agSalon.Domain.Migrations
 
             modelBuilder.Entity("agSalon.Domain.Entities.Service", b =>
                 {
-                    b.Navigation("Service_Group")
-                        .IsRequired();
+                    b.Navigation("Service_Group");
                 });
 
             modelBuilder.Entity("agSalon.Domain.Entities.Worker", b =>

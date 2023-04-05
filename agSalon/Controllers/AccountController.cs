@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using agSalon.Services.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace agSalon.Controllers
 {
@@ -64,11 +66,16 @@ namespace agSalon.Controllers
 			return View(loginVM);
 		}
 
-		public IActionResult Register() => View(new RegisterVM());
+		public IActionResult Register() 
+		{
+			TempData["Role"] = UserRoles.Client;
+			return View(new RegisterVM());
+		}
 
 		[HttpPost]
-		public async Task<IActionResult> Register(RegisterVM registerVM)
+		public async Task<IActionResult> Register(RegisterVM registerVM, string role = UserRoles.Client)
 		{
+			TempData["Role"] = role;
 			if (!ModelState.IsValid)
 				return View(registerVM);
 
@@ -94,14 +101,25 @@ namespace agSalon.Controllers
 
 			if (newUserResponse.Succeeded)
 			{
-				await _userManager.AddToRoleAsync(newUser, UserRoles.Client);
+				await _userManager.AddToRoleAsync(newUser, role);
 				return View("RegisterCompleted");
 			}
 
 			ViewBag.Errors = newUserResponse.Errors;
-
+			
 			return View(registerVM);
 		}
+
+		[Authorize(Roles = UserRoles.Admin)]
+		public IActionResult CreateAdmin() => View(new RegisterVM());
+
+		[Authorize(Roles = UserRoles.Admin)]
+		[HttpPost]
+		public Task<IActionResult> CreateAdmin(RegisterVM registerVM)
+		{
+			return Register(registerVM, UserRoles.Admin);			
+		}
+
 
 		[HttpPost]
 		public async Task<IActionResult> Logout()
