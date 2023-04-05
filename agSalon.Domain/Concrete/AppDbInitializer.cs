@@ -409,7 +409,7 @@ namespace agSalon.Domain.Concrete
 						{
 							Id = newWorkerUser.Id,
 							Address = "Workers's Address",
-							Gender = Gender.Female
+							Gender = Gender.Female.ToString()
 						};
 
 						context.Workers.Add(newWorker);
@@ -454,7 +454,7 @@ namespace agSalon.Domain.Concrete
 						{
 							Id = newWorkerUser.Id,
 							Address = "Workers's 2 Address",
-							Gender = Gender.Female
+							Gender = Gender.Female.ToString()
 						};
 
 						context.Workers.Add(newWorker);

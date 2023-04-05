@@ -25,10 +25,11 @@ namespace agSalon.Domain.Concrete
         {
             modelBuilder.ApplyConfiguration(new AttendanceConfiguration());
             modelBuilder.ApplyConfiguration(new GroupOfServicesConfiguration());
+			modelBuilder.ApplyConfiguration(new ScheduleConfiguration());
 
 
-            /**/
-            modelBuilder.Entity<ServiceGroup>().HasKey(sg => new { sg.ServiceId, sg.GroupId });
+			/**/
+			modelBuilder.Entity<ServiceGroup>().HasKey(sg => new { sg.ServiceId, sg.GroupId });
 
             modelBuilder.Entity<ServiceGroup>().HasOne(g => g.Group).WithMany(sg => sg.Services_Groups);
 

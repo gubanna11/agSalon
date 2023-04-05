@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using agSalon.Domain.Concrete;
 
@@ -10,9 +11,11 @@ using agSalon.Domain.Concrete;
 namespace agSalon.Domain.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230405085610_gender_str")]
+    partial class gender_str
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,14 +170,12 @@ namespace agSalon.Domain.Migrations
                         .HasColumnType("int")
                         .HasColumnName("group_id");
 
-                    b.Property<string>("IsPaid")
-                        .HasMaxLength(3)
-                        .HasColumnType("varchar(3)")
+                    b.Property<int>("IsPaid")
+                        .HasColumnType("int")
                         .HasColumnName("paid");
 
-                    b.Property<string>("IsRendered")
-                        .HasMaxLength(3)
-                        .HasColumnType("varchar(3)")
+                    b.Property<int>("IsRendered")
+                        .HasColumnType("int")
                         .HasColumnName("rendered");
 
                     b.Property<double>("Price")
@@ -373,8 +374,7 @@ namespace agSalon.Domain.Migrations
                         .HasColumnName("address");
 
                     b.Property<string>("Gender")
-                        .HasMaxLength(6)
-                        .HasColumnType("varchar(6)")
+                        .HasColumnType("longtext")
                         .HasColumnName("gender");
 
                     b.HasKey("Id");

@@ -4,8 +4,8 @@
 @if (!User.Identity.IsAuthenticated)
 {
 	<div class="identity">
-		<a asp-controller="Account" asp-action="Login" class="sign-in">Sign In</a>
-		<a asp-controller="Account" asp-action="Register" class="sign-up">Sign Up</a>
+		<a class="text-dark" asp-controller="Account" asp-action="Login" class="sign-in">Sign In</a>
+		<a class="text-dark" asp-controller="Account" asp-action="Register" class="sign-up">Sign Up</a>
 	</div>
 }
 else

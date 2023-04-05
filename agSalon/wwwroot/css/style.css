@@ -106,6 +106,33 @@ body {
   pointer-events: all;
 }
 
+.nav-item a {
+  font-size: 18px;
+}
+
+.navbar {
+  /*padding: 30px;*/
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  padding: 0;
+}
+
+.navbar-nav {
+  gap: 40px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container li {
+  padding: 28px 0px;
+}
+
 .identity {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -117,9 +144,13 @@ body {
       justify-content: space-around;
   width: 220px;
 }
+.identity i {
+  font-size: 20px;
+}
 
 .identity-sign-in {
   position: relative;
+  padding: 32px 0px;
 }
 
 .identity-sign-in__info {
@@ -143,19 +174,4 @@ body {
   visibility: visible;
   opacity: 1;
   pointer-events: all;
-}
-
-.nav-item a {
-  font-size: 20px;
-}
-
-.navbar {
-  padding: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  width: 100%;
 }

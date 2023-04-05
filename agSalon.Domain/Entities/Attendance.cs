@@ -44,10 +44,12 @@ namespace agSalon.Domain.Entities
         public double Price { get; set; }
 
         [Column("rendered")]
-        public YesNoEnum IsRendered { get; set; }
+        [StringLength(3)]
+        public string IsRendered { get; set; }
 
         [Column("paid")]
-        public YesNoEnum IsPaid { get; set; }
+		[StringLength(3)]
+		public string IsPaid { get; set; }
 
     }
 }

@@ -20,7 +20,8 @@ namespace agSalon.Domain.Entities
         public string Address { get; set; }
 
         [Column("gender")]
-        public Gender Gender { get; set; }
+		[StringLength(6)]
+		public string Gender { get; set; }
 
         public List<Worker_Group> Workers_Groups { get; set; }
     }

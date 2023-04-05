@@ -23,16 +23,16 @@
 				</button>
 				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 					<ul class="navbar-nav flex-grow-1">
-						<li class="nav-item">
+						@*<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-						</li>
+						</li>*@
 					@*	<li class="nav-item">
 							<a class="nav-link text-dark" asp-area="" asp-controller="Groups" asp-action="Index">Groups</a>
 							
 						</li>*@
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" asp-controller="Groups" asp-action="Index" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" aria-haspopup="true">
-								Groups
+							<a class="nav-link dropdown-toggle text-dark" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" aria-haspopup="true">
+									Groups
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 								@{
@@ -46,26 +46,54 @@
 
 						</li>
 
-						@if (User.Identity.IsAuthenticated && User.IsInRole(UserRoles.Admin))
+					@if (User.Identity.IsAuthenticated)
 						{
 							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" aria-haspopup="true">
+								<a class="nav-link dropdown-toggle text-dark" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" aria-haspopup="true">
+									My Attendances
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+									<a class="dropdown-item" asp-controller="" asp-action="">History</a>
+									<a class="dropdown-item" asp-controller="" asp-action="">Not Rendered</a>
+								</div>
+							</li>
+						}
+
+						@if (User.Identity.IsAuthenticated && User.IsInRole(UserRoles.Worker))
+						{
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle text-dark" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" aria-haspopup="true">
 									Management
 								</a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-									<a class="dropdown-item" asp-controller="Groups" asp-action="Create">Create Group</a>
-									<a class="dropdown-item" asp-controller="Services" asp-action="Create">Create Service</a>
+									<a class="dropdown-item" asp-controller="" asp-action="">History</a>
+									<a class="dropdown-item" asp-controller="" asp-action="">Not Rendered</a>
+								</div>
+							</li>
+						}
+
+						@if (User.Identity.IsAuthenticated && User.IsInRole(UserRoles.Admin))
+						{
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle text-dark" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown" aria-haspopup="true">
+									Management
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+									<a class="dropdown-item" asp-controller="Groups" asp-action="Create"><i class="bi bi-person-square"></i>Create Group</a>
+									<a class="dropdown-item" asp-controller="Services" asp-action="Create"><i class="bi bi-person-square"></i>Create Service</a>
 									<a class="dropdown-item" asp-controller="Account" asp-action="Register"><i class="bi bi-person-square"></i> New Client</a>
 									<a class="dropdown-item" asp-controller="Account" asp-action="CreateWorker"><i class="bi bi-person-square"></i> New Worker</a>
 									<a class="dropdown-item" asp-controller="Account" asp-action="CreateAdmin"><i class="bi bi-person-square"></i> New Admin</a>
 								</div>
-
 							</li>
 						}
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" >Contacts</a>
+						</li>
 					</ul>
 				</div>
-			</div>
-			<partial name="_Identity.cshtml" />
+				<partial name="_Identity.cshtml" />
+			</div>			
 		</nav>
 	</header>
 	<div class="container">
