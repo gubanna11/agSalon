@@ -13,7 +13,7 @@ namespace agSalon.Domain.Concrete.EntityConfiguration
 	{
 		public void Configure(EntityTypeBuilder<Schedule> builder)
 		{
-			builder.HasKey(g => new { g.Day, g.Start, g.End });
+			builder.HasKey(g => new { g.WorkerId, g.Day });
 		}
 	}
 }

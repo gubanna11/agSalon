@@ -9,7 +9,7 @@
 	</div>
 }
 
-<form asp-action="Register">
+<form asp-action="CreateAdmin" asp-route-role="Admin">
 	<div>
 		<label asp-for="Name"></label>
 		<input asp-for="Name" />
@@ -52,6 +52,6 @@
 		<span asp-validation-for="ConfirmPassword"></span>
 	</div>
 	<div>
-		<input asp-action="Register" asp-route-role="Admin" value="Register" type="submit" />
+		<input value="Register" type="submit" />
 	</div>
 </form>

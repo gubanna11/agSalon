@@ -1,10 +1,8 @@
 ﻿@model int 
 
-<div class="delete">
-	<a class="delete-confirm">Delete</a>
-	<form asp-action="Delete" asp-route-id="@Model">
+<span class="delete">
+	<a class="delete-confirm"><i class="bi bi-trash-fill"></i></a>
+	<form style="display:inline-block" asp-action="Delete" asp-route-id="@Model">
 		<input type="submit" style="color:red" value="Delete">
 	</form>
-</div>
-
-
+</span>

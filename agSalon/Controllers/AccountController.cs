@@ -83,15 +83,23 @@ namespace agSalon.Controllers
 		{
 			TempData["Role"] = role;
 			if (!ModelState.IsValid)
+			{
+				if (role == UserRoles.Admin)
+					return View("CreateAdmin", registerVM);
 				return View(registerVM);
+			}
+
 
 			var user = await _userManager.FindByEmailAsync(registerVM.EmailAddress);
 
 			if (user != null)
 			{
-				TempData["Error"] = "this email address is already in use!";
+				TempData["Error"] = "This email address is already in use!";
+				if (role == UserRoles.Admin)
+					return View("CreateAdmin", registerVM);
 				return View(registerVM);
 			}
+
 
 			var newUser = new Client()
 			{
@@ -112,12 +120,17 @@ namespace agSalon.Controllers
 			}
 
 			ViewBag.Errors = newUserResponse.Errors;
-			
+
+
+			if (role == UserRoles.Admin)
+				return View("CreateAdmin");
 			return View(registerVM);
 		}
 
+
 		[Authorize(Roles = UserRoles.Admin)]
 		public IActionResult CreateAdmin() => View(new RegisterVM());
+
 
 		[Authorize(Roles = UserRoles.Admin)]
 		[HttpPost]
@@ -129,11 +142,19 @@ namespace agSalon.Controllers
 
 
 
+
+
+
+
 		[Authorize(Roles = UserRoles.Admin)]
 		public async Task<IActionResult> CreateWorker()
 		{
 			var groups = await _groupsService.GetAllAsync();
+
 			ViewBag.Groups = new SelectList(groups, "Id", "Name");
+			ViewBag.Days = Enum.GetValues(typeof(Days)).Cast<Days>().ToList();
+			
+
 			return View(new NewWorkerVM());
 		}
 
@@ -143,6 +164,7 @@ namespace agSalon.Controllers
 		{
 			var groups = await _groupsService.GetAllAsync();
 			ViewBag.Groups = new SelectList(groups, "Id", "Name");
+			ViewBag.Days = Enum.GetValues(typeof(Days)).Cast<Days>().ToList();
 
 			if (!ModelState.IsValid)
 			{
@@ -206,7 +228,13 @@ namespace agSalon.Controllers
 				list.Add(worker_group);
 			}
 
+
+			var schedules = newWorkerVM.Schedules.Where(s => s.Start != TimeSpan.Zero && s.End != TimeSpan.Zero).ToList();
+			schedules.ForEach(s => s.WorkerId = newWorkerVM.Id);
+			
+
 			await _context.Workers_Groups.AddRangeAsync(list);
+			await _context.Schedules.AddRangeAsync(schedules);
 
 			await _context.SaveChangesAsync();
 

@@ -92,6 +92,10 @@ body {
   margin-bottom: 60px;
 }
 
+i {
+  cursor: pointer;
+}
+
 .delete > form {
   overflow: hidden;
   opacity: 0;

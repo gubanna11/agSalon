@@ -4,24 +4,35 @@
 	ViewData["Title"] = "Services";
 }
 
-<div class="services__section">
-	<p>Group: @ViewBag.GroupName</p>
 
-	@*<form>
-	<input type="submit" asp-action="Update" asp-controller="" asp-route-groups="@Model.ToList()" value="SAVE">
-	</form>*@
+<h2>Group: @ViewBag.GroupName</h2>
 
-	@foreach (var item in Model)
-	{
-		<div class="container" style="display:flex; justify-content:space-between">
-			<p>@item.Name</p>
+<table class="table">
 
-			<p>@item.Price</p>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Price</th>
 			@if (User.Identity.IsAuthenticated && User.IsInRole(UserRoles.Admin))
 			{
-				<a asp-action="Edit" asp-route-id="@item.Id">Update</a>
-				@await Component.InvokeAsync("Delete", item.Id)
+				<th>Edit</th>
+				<th>Delete</th>
 			}
-		</div>
-	}
-</div>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.Name</td>
+
+				<td>@item.Price</td>
+				@if (User.Identity.IsAuthenticated && User.IsInRole(UserRoles.Admin))
+				{
+					<td><a asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-fill"></i></a></td>
+					<td>@await Component.InvokeAsync("Delete", item.Id)</td>
+				}
+			</tr>
+		}
+	</tbody>
+</table>

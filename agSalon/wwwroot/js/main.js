@@ -1,5 +1,4 @@
-﻿
-const deletes = document.querySelectorAll('.delete');
+﻿const deletes = document.querySelectorAll('.delete');
 
 const deletes_a = document.querySelectorAll('.delete-confirm');
 
@@ -33,7 +32,3 @@ document.onkeydown = function (e) {
             if (!e.composedPath().includes(del))
                 del.classList.remove('active');
 }
-
-
-
-

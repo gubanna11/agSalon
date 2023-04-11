@@ -24,5 +24,6 @@ namespace agSalon.Domain.Entities
 		public string Gender { get; set; }
 
         public List<Worker_Group> Workers_Groups { get; set; }
-    }
+		public List<Schedule> Schedules { get; set; }
+	}
 }

@@ -1,15 +1,16 @@
 ﻿using agSalon.Domain.Entities;
-using agSalon.Domain.Migrations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.Design;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace agSalon.Services.ViewModels
 {
-    public class NewWorkerVM
+    public class WorkerVM
     {
         public string? Id { get; set; }
 
@@ -46,17 +47,7 @@ namespace agSalon.Services.ViewModels
 		[Required(ErrorMessage = "Email address is required")]
 		public string EmailAddress { get; set; }
 
-		[Required]
-		[DataType(DataType.Password)]
-		public string Password { get; set; }
-
-		[Required(ErrorMessage = "Confirm password is required")]
-		[DataType(DataType.Password)]
-		[Compare("Password", ErrorMessage = "Passwords don't match")]
-		public string ConfirmPassword { get; set; }
-
-
+		
 		public List<Schedule> Schedules { get; set; } = new List<Schedule>();
-
 	}
 }

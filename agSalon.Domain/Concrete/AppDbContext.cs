@@ -16,6 +16,7 @@ namespace agSalon.Domain.Concrete
         public DbSet<Worker> Workers { get; set; }
 
         public DbSet<Worker_Group> Workers_Groups { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
 
         public DbSet<Attendance> Attendances { get; set; }
 
@@ -26,7 +27,7 @@ namespace agSalon.Domain.Concrete
             modelBuilder.ApplyConfiguration(new AttendanceConfiguration());
             modelBuilder.ApplyConfiguration(new GroupOfServicesConfiguration());
 			modelBuilder.ApplyConfiguration(new ScheduleConfiguration());
-
+			
 
 			/**/
 			modelBuilder.Entity<ServiceGroup>().HasKey(sg => new { sg.ServiceId, sg.GroupId });
@@ -40,9 +41,10 @@ namespace agSalon.Domain.Concrete
 
             modelBuilder.Entity<Worker_Group>().HasOne(w => w.Group).WithMany(wg => wg.Workers_Groups);
 
+            modelBuilder.Entity<Schedule>().HasOne(w => w.Worker).WithMany(w => w.Schedules).OnDelete(DeleteBehavior.Cascade);
 
 
-            base.OnModelCreating(modelBuilder);
+			base.OnModelCreating(modelBuilder);
         }
 
     }

@@ -5,9 +5,9 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "agSalon", "agSalon\agSalon.csproj", "{76A07F38-6B1F-49A3-AE18-CD0965FF6229}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "agSalon.Services", "agSalon.Services\agSalon.Services.csproj", "{B3B21C48-D4A4-46D3-936F-7A44BEF680FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "agSalon.Services", "agSalon.Services\agSalon.Services.csproj", "{B3B21C48-D4A4-46D3-936F-7A44BEF680FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "agSalon.Domain", "agSalon.Domain\agSalon.Domain.csproj", "{EE1D9CFE-658B-4CE1-BE73-73DA2C6A9821}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "agSalon.Domain", "agSalon.Domain\agSalon.Domain.csproj", "{EE1D9CFE-658B-4CE1-BE73-73DA2C6A9821}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,17 +1,9 @@
-﻿@model NewWorkerVM
+﻿@model WorkerVM
 
-<p class="display4">Create @TempData["Role"]</p>
-
-@if (TempData["Error"] != null)
-{
-	<div>
-		<p class="text-danger">Sorry! - @TempData["Error"]</p>
-	</div>
-}
-
-<form asp-action="CreateWorker">
+<form asp-action="Edit">
 	<div style="display:flex">
 		<div>
+			<input type="hidden" asp-for="Id" />
 			<div>
 				<label asp-for="Name"></label>
 				<input asp-for="Name" />
@@ -54,22 +46,6 @@
 				<select multiple asp-for="GroupsIds" asp-items="ViewBag.Groups"></select>
 				<span asp-validation-for="GroupsIds"></span>
 			</div>
-			<div>
-				<label asp-for="Password"></label>
-				<input asp-for="Password" />
-				@if (ViewBag.Errors != null)
-				{
-					foreach (var item in ViewBag.Errors)
-					{
-						<p style="color:red" asp-validation-for="Password">@item.Description</p>
-					}
-				}
-			</div>
-			<div>
-				<label asp-for="ConfirmPassword"></label>
-				<input asp-for="ConfirmPassword" />
-				<span asp-validation-for="ConfirmPassword"></span>
-			</div>
 		</div>
 
 		<div>
@@ -77,26 +53,19 @@
 				for (int i = 0; i < ViewBag.Days.Count; i++)
 				{
 					<div>
-						@{
-							Model.Schedules.Add(new Schedule());
-						}
+						<input hidden asp-for="@Model.Schedules[i].WorkerId" value="@Model.Id" />
 						<input hidden asp-for="@Model.Schedules[i].Day" value="@ViewBag.Days[i]" />
 						<p>@ViewBag.Days[i]</p>
 						<input type="time" asp-for="@Model.Schedules[i].Start" />
 						<input type="time" asp-for="@Model.Schedules[i].End" />
 					</div>
+					
 				}
 			}
 		</div>
-
 	</div>
 
 	<div>
-		<input value="Create" type="submit" />
+		<button type="submit">Save</button>
 	</div>
 </form>
-
-@section Scripts{
-
-}
-

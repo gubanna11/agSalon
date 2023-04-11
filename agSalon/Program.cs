@@ -27,6 +27,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IGroupsService, GroupsService>();
 builder.Services.AddScoped<IServicesService, ServicesService>();
+builder.Services.AddScoped<IWorkersService, WorkersService>();
 
 builder.Services.AddIdentity<Client, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
